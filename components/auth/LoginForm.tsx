@@ -4,7 +4,7 @@ import * as z from "zod";
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@/components/ui/button"
-import { loginSchema } from "@/schemas";
+import { LoginSchema } from "@/schemas";
 import {
   Form,
   FormControl,
@@ -27,22 +27,22 @@ const LoginForm = () => {
   const [success,setSuccess] = useState<string | undefined>("");
 
   const [isPending,startTransition] = useTransition();
-  const form = useForm<z.infer<typeof loginSchema>>({
-    resolver:zodResolver(loginSchema),
+  const form = useForm<z.infer<typeof LoginSchema>>({
+    resolver:zodResolver(LoginSchema),
     defaultValues:{
       email:"",
       password:""
     }
   })
 
-  const onSubmit = (values:z.infer<typeof loginSchema>) => {
+  const onSubmit = (values:z.infer<typeof LoginSchema>) => {
     setError("");
     setSuccess("");
 
     startTransition(()=>{
       login(values).then((data)=>{
-        setError(data.error);
-        setSuccess(data.success);
+        setError(data?.error);
+        setSuccess(data?.success);
       });
     });
   }
