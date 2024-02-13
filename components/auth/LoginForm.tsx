@@ -46,8 +46,7 @@ const LoginForm = () => {
     startTransition(()=>{
       login(values).then((data)=>{
         setError(data?.error);
-        // TODO: when we add 2 factor Auth 
-        // setSuccess(data?.success);
+        setSuccess(data?.success);
       });
     });
   }
