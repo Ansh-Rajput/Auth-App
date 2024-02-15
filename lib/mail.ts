@@ -9,7 +9,7 @@ export const sendPasswordResetEmail = async (email:string,token:string) => {
         from:"onboarding@resend.dev",
         to:email,
         subject:"Reset your password",
-        html:`<p>Click <a href="${resetLink}">here</a> to reset password.`
+        html:`<p>Click <a href="${resetLink}">here</a> to reset password.</p>`
     });
 }
 
@@ -20,6 +20,16 @@ export const sendVerificationEmail = async (email:string,token:string) => {
         from:"onboarding@resend.dev",
         to:email,
         subject:"Confirm your email",
-        html:`<p>Click <a href="${confirmLink}">here</a> to confirm email.`
+        html:`<p>Click <a href="${confirmLink}">here</a> to confirm email.</p>`
+    });
+
+}
+export const sendTwoFactorEmail = async (email:string,token:string) => {
+
+    await resend.emails.send({
+        from:"onboarding@resend.dev",
+        to:email,
+        subject:"Two factor Code ",
+        html:`<p>Your Two factor code : ${token}</p>`
     });
 }
